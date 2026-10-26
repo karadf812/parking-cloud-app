@@ -1,1 +1,0 @@
-<?xml version="1.0 encoding=UTF-8?><CustomSetting xmlns=http://soap.sforce.com/2006/04/metadata><fullName>Parking_Settings__c</fullName><customSettingType>Hierarchy</customSettingType><description>Stores configuration like default page size for the parking app</description><enableFeeds>false</enableFeeds><label>Parking Settings</label></CustomSetting>
