@@ -1,0 +1,53 @@
+<template>
+    <lightning-card title="Parking Cloud - Sensor Manager" icon-name="custom:custom67">
+        <div class="slds-m-around_medium">
+            
+            <!-- Top Action Bar: CSV Upload & Status Filter -->
+            <div class="slds-grid slds-gutters slds-m-bottom_medium">
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-input type="file" label="Upload Sensor CSV" accept=".csv" onchange={handleFileChange}></lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-align-bottom">
+                    <lightning-combobox
+                        label="Filter by Status"
+                        value={statusFilter}
+                        options={statusOptions}
+                        onchange={handleFilterChange}>
+                    </lightning-combobox>
+                </div>
+            </div>
+
+            <!-- Sensor Data Table -->
+            <template if:true={sensors.length}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={sensors}
+                    columns={columns}
+                    hide-checkbox-column
+                    onrowaction={handleRowAction}>
+                </lightning-datatable>
+
+                <!-- Pagination Controls -->
+                <div class="slds-clearfix slds-m-top_medium">
+                    <div class="slds-float_left">
+                        <lightning-button label="Previous" onclick={handlePrevPage} disabled={isFirstPage} variant="neutral"></lightning-button>
+                    </div>
+                    <div class="slds-float_none slds-text-align_center" style="display: inline-block; width: calc(100% - 160px);">
+                        <span>Page {pageNumber} of {totalPages} (Total Records: {totalRecords})</span>
+                    </div>
+                    <div class="slds-float_right">
+                        <lightning-button label="Next" onclick={handleNextPage} disabled={isLastPage} variant="neutral" class="slds-m-left_x-small"></lightning-button>
+                    </div>
+                </div>
+            </template>
+
+            <!-- Empty State -->
+            <template if:false={sensors.length}>
+                <div class="slds-align_absolute-center slds-m-around_large">
+                    <p class="slds-text-color_weak">No sensors found. Upload a CSV file to get started.</p>
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>
